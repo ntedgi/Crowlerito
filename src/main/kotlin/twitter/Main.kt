@@ -32,20 +32,18 @@ fun main(args: Array<String>) {
     val spider = TwitterSpider()
     val cal = Calendar.getInstance()
     val now = cal.time
-    cal.add(Calendar.MONTH, -72)
+    cal.add(Calendar.MONTH, -12)
     val from = cal.time
-    File(outputDirPath).mkdir()
-    var fileWriter = FileWriter(File(outputDirPath, topic))
-    val csvWriter = CSVWriter(
-        fileWriter,
-        CSVWriter.DEFAULT_SEPARATOR,
-        CSVWriter.NO_QUOTE_CHARACTER,
-        CSVWriter.DEFAULT_ESCAPE_CHARACTER,
-        CSVWriter.DEFAULT_LINE_END
-    )
-    spider.crawlTweets(topic, from, now) {
-        csvWriter.writeNext(arrayOf<String>(it.id.toString(), it.userName, it.createdAt, it.text))
+    if (!File(outputDirPath).exists())
+        File(outputDirPath).mkdir()
+    var fileWriter = File(outputDirPath, topic)
+
+    fileWriter.bufferedWriter().use { writer ->
+        spider.crawlTweets(topic, from, now) {
+            writer.appendln("${it.id},${it.userName},${it.createdAt},${it.text}")
+        }
     }
+
 
 }
 

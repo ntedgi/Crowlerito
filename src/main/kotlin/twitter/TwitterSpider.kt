@@ -56,12 +56,11 @@ class TwitterSpider {
                 val initData = doc.getElementById("init-data").attr("value")
                 val jInitData = GSON.fromJson(initData, JsonObject::class.java)
                 val endPoint = jInitData.get("searchEndpoint").asString
-                System.out.println(endPoint)
 
                 val streamContainer = timeline.first().select("div.stream-container").first()
 
                 var maxPosition = streamContainer.attr("data-min-position")
-                System.out.println(maxPosition)
+
                 var tweets = streamContainer.select("li.stream-item")
 
                 System.out.println(String.format("%s - Found %d tweet(s) ..", getCurrentTime(), tweets.size))
@@ -125,11 +124,9 @@ class TwitterSpider {
         val url = URL(autoLoadURL)
         val conn = url.openConnection()
         conn.setRequestProperty("User-Agent", USER_AGENT)
-        System.out.println(url.toString())
 
         BufferedReader(InputStreamReader(conn.getInputStream())).useLines { lines ->
             lines.forEach { line ->
-                System.out.println(line)
                 stringBuilder.append(line)
             }
         }
