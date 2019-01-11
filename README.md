@@ -6,7 +6,7 @@ java  , maven
 ```
 
 ```sh
-./install 
+mvn install 
 ```
 
 ```sh
