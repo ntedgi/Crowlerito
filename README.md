@@ -13,11 +13,11 @@ dependencies :
 ```sh 
 java  , maven 
 ```
-
+install : 
 ```sh
 mvn install 
 ```
-
+run:
 ```sh
 ./crawl -a <account> -o <outputDir> 
 ```
