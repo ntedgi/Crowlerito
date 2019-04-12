@@ -7,7 +7,7 @@ todo:
 - add distinct posts parameter
 - add filter retweet as parameter
 - add schema to output format as parameter
-
+- add unit tests
 
 dependencies :
 ```sh 
